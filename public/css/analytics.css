@@ -1,0 +1,67 @@
+body {
+    background-color: #121212;
+    color: #fff;
+}
+
+.stats-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.back-button {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 1.5rem;
+    margin-right: 0.75rem;
+}
+
+.back-button:hover {
+    color: #bbb;
+}
+
+.week-row {
+    background-color: #1f1f1f;
+    border-radius: 0.5rem;
+    overflow: hidden;
+}
+
+.day-box {
+    flex: 1;
+    text-align: center;
+    padding: 0.75rem 0;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.day-box:hover {
+    background-color: #2c2c2c;
+}
+
+.selected-day {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.court-container {
+    text-align: center;
+    margin: 1.5rem 0;
+}
+
+.court-img {
+    max-width: 100%;
+    height: auto;
+}
+
+.advanced-stats {
+    background-color: #1f1f1f;
+    border-radius: 0.5rem;
+    padding: 0.75rem;
+    text-align: center;
+    font-weight: 500;
+}
+
+.advanced-stats:hover {
+    background-color: #2c2c2c;
+}
