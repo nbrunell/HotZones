@@ -24,7 +24,7 @@
 
                 <label for="login-password">Password:</label>
                 <input type="password" id="login-password" placeholder="Enter your password" required>
-
+    
                 <button type="submit" class="button">Logon</button>
             </form>
 
@@ -36,8 +36,15 @@
                 <label for="create-password">Password:</label>
                 <input type="password" id="create-password" placeholder="Create your password" required>
 
+                <label for="role">Choose a role:</label>
+                <select name="role" id="role">
+                        <option value="player">Player</option>
+                        <option value="coach">Coach</option>
+                </select>   
+                
                 <button type="submit" class="button">Create Account</button>
             </form>
+
 
             <p id="message" class="message"></p>
         </div>
