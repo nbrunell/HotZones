@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
     <link rel="stylesheet" href="/css/dashboard.css">
 </head>
+
 <body>
     <div class="container">
         <div class="header">
@@ -13,9 +15,10 @@
             <div>
                 <button id="refreshButton">Refresh List</button>
                 <button id="logoutButton">Log Out</button>
+                <button id="profileButton" onclick="window.location.href='/profile.html'">My Profile</button>
             </div>
         </div>
-        
+
         <div>
             <img src="/images/zonemap.jpg" alt="zonemap">
         </div>
@@ -25,4 +28,5 @@
     <script src="/js/dashboard.js"></script>
     <script src="/js/datamodel.js"></script>
 </body>
+
 </html>
