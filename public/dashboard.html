@@ -11,26 +11,17 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>Users</h1>
-            <div>
-                <button id="refreshButton">Refresh List</button>
-                <button id="logoutButton">Log Out</button>
-            </div>
+            <h1>Your Zones</h1>
         </div>
         
+        <div>   
+            <button id="profileButton" onclick="window.location.href='/profile.html'">My Profile</button>
+        </div>
 
-            <h1>Users</h1>
-            <div>
-                <button id="refreshButton">Refresh List</button>
-                <button id="logoutButton">Log Out</button>
-                <button id="profileButton" onclick="window.location.href='/profile.html'">My Profile</button>
-            </div>
-
-        <div>
+        <div class="zoneImage">
             <img src="/images/zonemap.jpg" alt="zonemap">
         </div>
 
-        <div class="user-list" id="userList"></div>
     </div>
     <script src="/js/dashboard.js"></script>
     <script src="/js/datamodel.js"></script>
