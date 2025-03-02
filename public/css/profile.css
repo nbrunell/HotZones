@@ -18,14 +18,14 @@ body {
     height: auto;
     object-fit: cover;
     border-radius: 50%;
-    border: 3px solid #007bff;
+    border: 3px solid #d67214;
 }
 
 .btn-custom {
-    background-color: #007bff;
+    background-color: #d67214;
     color: #fff;
 }
 
 .btn-custom:hover {
-    background-color: #0056b3;
+    background-color: #9a520f;
 }
