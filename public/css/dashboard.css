@@ -17,7 +17,7 @@ body {
 
 .header {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
 }
 
@@ -63,4 +63,10 @@ h1 {
 .user-item {
     padding: 10px;
     border-bottom: 1px solid #ddd;
+}
+
+.zoneImage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
