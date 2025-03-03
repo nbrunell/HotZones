@@ -33,7 +33,7 @@ h1 {
 
 #logoutButton {
     padding: 10px 20px;
-    background-color: #007bff;
+    background-color: #d67214;
     color: white;
     border: none;
     border-radius: 5px;
@@ -41,20 +41,20 @@ h1 {
 }
 
 #logoutButton:hover {
-    background-color: #0056b3;
+    background-color: #9a520f;
 }
 
-#refreshButton {
-    background-color: #28a745; /* Same green color from logon button */
+#profileButton {
+    padding: 10px 20px;
+    background-color: #d67214;
     color: white;
     border: none;
-    padding: 10px 20px;
     border-radius: 5px;
     cursor: pointer;
 }
 
-#refreshButton:hover {
-    background-color: #218838; /* Slightly darker green for hover effect */
+#profileButton:hover {
+    background-color: #9a520f;
 }
 
 .user-list {
