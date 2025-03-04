@@ -5,6 +5,59 @@ body {
     margin: 0;
     padding: 0;
 }
+/*Styling for the hamburger menu*/
+#hamburger {
+    fill: white;
+    height: 38px;
+    width: 38px;
+    margin: 10px;
+    cursor: pointer;
+  }
+  
+  #sidebar {
+    width: 0px;
+    height: 100vh;
+    background-color: #d67214;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    overflow: hidden;
+    transition: width 0.5s ease;
+    white-space: nowrap;
+  }
+  
+  .sidebar-item {
+    text-decoration: none;
+    color: black;
+    display: flex;
+    padding: 1em;
+    align-items: center;
+    cursor: pointer;
+  }
+  .sidebar-item:hover {
+    background-color: #9a520f;
+  }
+  
+  .sidebar-item > div {
+    padding: 0 1em;
+  }
+  
+  .sidebar-item svg {
+    flex-shrink: 0;
+  }
+  
+  #overlay {
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.4);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    display: none;
+  }
+/*END OF STYLING FOR HAMBURGER MENU*/
 
 .container {
     background-color: #1e1e1e;
@@ -38,6 +91,9 @@ h1 {
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    position: fixed;
+    top: 10px;
+    right: 10px;
 }
 
 #logoutButton:hover {

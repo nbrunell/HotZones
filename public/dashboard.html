@@ -9,14 +9,54 @@
 </head>
 
 <body>
+    <!--Everything in main currently contains code for the hamburger menu-->
+    <main>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          height="24"
+          viewBox="0 0 24 24"
+          width="24"
+          id="hamburger"
+        >
+          <path d="M0 0h24v24H0z" fill="none" />
+          <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z" />
+        </svg>
+        <div id="overlay"></div>
+        <div id="sidebar">
+          <a href="" class="sidebar-item">
+            <div>Home</div>
+          </a>
+          <a href="/profile.html" class="sidebar-item">
+            <div>My Profile</div>
+          </a>
+          <a href="/analytics.html" class="sidebar-item">
+            <div>Analytics</div>
+          </a>
+          <a href="/videos.html" class="sidebar-item">
+            <div>Get Help</div>
+          </a>
+        </div>
+      </main>
+      <!--END OF CODE FOR MENU-->
+
+      <!--Took the button out of the container to be placed on the top right-->
+      <button id="logoutButton">Log Out</button>
+
     <div class="container">
+
         <div class="header">
-            <h1>Your Zones</h1>
+            <h1>Hi [User's Name]!</h1>
+        </div>
+
+        <h2>Let's input your shot data below...</h2>
+        
+        <div class="header">
+            <h3>Your Zones</h3>
         </div>
         
         <div class="buttons">   
-            <button id="profileButton" onclick="window.location.href='/profile.html'">My Profile</button>
-            <button id="logoutButton">Log Out</button>
+            <!-- <button id="profileButton" onclick="window.location.href='/profile.html'">My Profile</button> -->
+            <!-- <button id="logoutButton">Log Out</button> -->
         </div>
 
         <div class="zoneImage">
