@@ -59,7 +59,12 @@
             <!-- <button id="logoutButton">Log Out</button> -->
         </div>
 
+        <div id="name">
+          <p id="namep"></p>
+        </div>
+
         <div class="zoneImage">
+          <!-- SVG image for court zones // would reccomend colapsing the defs tag as it is just a long url for the image -->
           <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1263 977" width="1263" height="977">
             <title>halfcourtnew</title>
             <defs>
@@ -90,11 +95,33 @@
           
             <path id="Left Wing" class="s0" d="m270 614l-270 2 4-247 84 1c0 0 26.1 117.6 182 244z"/>
           
-            <path id="Top of key" class="s0" d="m270 614l-270 3 4 360h1259v-368l-255-2c0 0-348.5 284.7-738 7z"/>
+            <path id="Top of the Key" class="s0" d="m270 614l-270 3 4 360h1259v-368l-255-2c0 0-348.5 284.7-738 7z"/>
           </svg>
         </div>
 
     </div>
+
+    <!-- script to display zone names while hovering -->
+    <script>
+        document.querySelectorAll(".s0").forEach(e=>{e.addEventListener("mouseover", function(){window.onmousemove=function(j){
+              let x=j.clientX
+              let y=j.clientY
+              document.getElementById("name").style.top=(y-30)+"px";
+              document.getElementById("name").style.left=(x+15)+"px";
+           }
+
+            e.style.fill="#d67214"
+            document.getElementById("name").style.opacity=1;
+            document.getElementById("namep").innerText = e.id;
+          })
+
+          e.addEventListener("mouseleave", function(){
+              e.style.fill="#808080"
+              document.getElementById("name").style.opacity=0
+          })
+        })
+    </script>
+
     <script src="/js/dashboard.js"></script>
     <script src="/js/datamodel.js"></script>
 </body>
