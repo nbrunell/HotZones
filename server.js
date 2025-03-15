@@ -175,6 +175,47 @@ app.get('/api/users', authenticateToken, async (req, res) => {
         res.status(500).json({ message: 'Error retrieving email addresses.' });
     }
 });
+
+//Route: Get current user profile 
+
+// Route: Get Current User Profile
+app.get('/api/profile', authenticateToken, async (req, res) => {
+    try {
+        const connection = await createConnection();
+        const [rows] = await connection.execute(
+            'SELECT email, name, bio, position FROM user WHERE email = ?',
+            [req.user.email]
+        );
+        await connection.end();
+
+        if (rows.length === 0) {
+            return res.status(404).json({ message: 'User not found.' });
+        }
+        res.status(200).json(rows[0]);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Error retrieving profile details.' });
+    }
+});
+
+
+// Route: Update User Profile
+app.put('/api/profile', authenticateToken, async (req, res) => {
+    const { name, bio, position } = req.body;
+    try {
+        const connection = await createConnection();
+        await connection.execute(
+            'UPDATE user SET name = ?, bio = ?, position = ? WHERE email = ?',
+            [name, bio, position, req.user.email]
+        );
+        await connection.end();
+        res.status(200).json({ message: 'Profile updated successfully!' });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Error updating profile.' });
+    }
+});
+
 //////////////////////////////////////
 //END ROUTES TO HANDLE API REQUESTS
 //////////////////////////////////////

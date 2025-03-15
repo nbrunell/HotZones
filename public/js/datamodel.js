@@ -69,5 +69,58 @@ const DataModel = (function () {
 
         //ADD MORE FUNCTIONS HERE TO FETCH DATA FROM THE SERVER
         //AND SEND DATA TO THE SERVER AS NEEDED
+
+        // Function to fetch the current user's profile data
+        getProfile: async function () {
+            if (!token) {
+                console.error("Token is not set.");
+                return {};
+            }
+            try {
+                const response = await fetch('/api/profile', {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': token,
+                        'Content-Type': 'application/json',
+                    },
+                });
+                if (!response.ok) {
+                    console.error("Error fetching profile:", await response.json());
+                    return {};
+                }
+                const data = await response.json();
+                return data;
+            } catch (error) {
+                console.error("Error in API call:", error);
+                return {};
+            }
+        },
+        // Add updateProfile function after getUsers (or alongside similar functions)
+        updateProfile: async function (profileData) {
+            if (!token) {
+                console.error("Token is not set.");
+                return { success: false };
+            }
+            try {
+                const response = await fetch('/api/profile', {
+                    method: 'PUT',
+                    headers: {
+                        'Authorization': token,
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(profileData),
+                });
+                if (!response.ok) {
+                    console.error("Error updating profile:", await response.json());
+                    return { success: false };
+                }
+                const data = await response.json();
+                return data;
+            } catch (error) {
+                console.error("Error in API call:", error);
+                return { success: false };
+            }
+        }
+
     };
 })();
