@@ -14,6 +14,50 @@ document.addEventListener('DOMContentLoaded', () => {
   //////////////////////////////////////////
   const logoutButton = document.getElementById('logoutButton');
   const refreshButton = document.getElementById('refreshButton');
+
+   // Add modal elements
+   const modal = document.getElementById('customModal');
+   const modalTitle = document.getElementById('modalZoneTitle');
+   const closeModal = document.querySelector('.close-modal');
+
+   //////////////////////////////////////////////////
+   // ATTACH CLICK EVENTS FOR ZONES
+   //////////////////////////////////////////////////
+   document.querySelectorAll('.s0').forEach(zone => {
+       zone.addEventListener('click', function () {
+           modalTitle.innerText = "Zone: " + this.id; // Update modal title
+           modal.style.display = 'flex'; // Show modal
+       });
+   });
+
+   //////////////////////////////////////////////////
+   // CLOSE MODAL WHEN CLICKING CLOSE BUTTON
+   //////////////////////////////////////////////////
+   closeModal.addEventListener('click', function () {
+       modal.style.display = 'none';
+   });
+
+   //////////////////////////////////////////////////
+   // CLOSE MODAL WHEN CLICKING OUTSIDE OF IT
+   //////////////////////////////////////////////////
+   window.addEventListener('click', function (e) {
+       if (e.target === modal) {
+           modal.style.display = 'none';
+       }
+   });
+
+   //////////////////////////////////////////////////
+   // EVENT LISTENERS FOR LOGOUT & REFRESH BUTTONS
+   //////////////////////////////////////////////////
+   logoutButton.addEventListener('click', () => {
+       localStorage.removeItem('token');
+       window.location.href = '/';
+   });
+
+   refreshButton.addEventListener('click', async () => {
+       renderUserList();
+   });
+
   //////////////////////////////////////////
   //END ELEMENTS TO ATTACH EVENT LISTENERS
   //////////////////////////////////////////

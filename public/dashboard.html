@@ -42,8 +42,6 @@
       <h1>Hi [User's Name]!</h1>
     </div>
 
-    <h2>Let's input your shot data below...</h2>
-
     <div class="header">
       <h3>Your Zones</h3>
     </div>
@@ -101,6 +99,26 @@
     </div>
 
   </div>
+
+  <!-- Custom Modal -->
+  <div id="customModal" class="modal-overlay">
+    <div class="modal-content">
+        <span class="close-modal">&times;</span>
+        <h2 id="modalZoneTitle">Zone Data</h2>
+        <p>Enter your shooting data: </p>
+        <form id="shooting-data-form">
+          <div class="input-container">
+            <input type="number" id="input-shots-made" placeholder="Shots made" required>
+            <span>/</span>
+            <input type="number" id="input-total-shots" placeholder="Shots taken" required>
+          </div>
+          <div class="button-container">
+            <button type="submit" class="submit-button">Submit</button>
+          </div>  
+        </form>
+    </div>
+  </div>
+
 
   <!-- script to display zone names while hovering -->
   <script>
