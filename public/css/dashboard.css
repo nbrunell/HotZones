@@ -211,7 +211,7 @@ svg path:hover{
   color: white; 
 }
 
-.button-container {
+.submit-container {
   display: flex;
   justify-content: center; 
   margin-top: 20px; 
@@ -229,4 +229,43 @@ svg path:hover{
 
 .submit-button:hover {
   background-color: #9a520f;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 10px;
+}
+
+#made-shot-button {
+  background-color: green;
+  color: white;
+  width: 100px;
+  height: 40px;
+  font-size: 25px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-top: 20px;
+}
+
+#made-shot-button:hover {
+  background-color: rgb(1, 91, 1);
+}
+
+#missed-shot-button {
+  background-color: red;
+  color: white;
+  width: 100px;
+  height: 40px;
+  font-size: 25px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-top: 20px;
+}
+
+#missed-shot-button:hover {
+  background-color: rgb(178, 0, 0);
 }
