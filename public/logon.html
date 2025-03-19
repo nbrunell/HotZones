@@ -30,6 +30,16 @@
 
             <!-- Create Account Form -->
             <form id="create-account-form">
+                <label for="role">Choose a role:</label>
+                <!--This creates the radio buttons for coach and player-->
+                <div id="firstFilter" class="filter-switch">
+                    <input checked="" id="option1" name="options" type="radio" />
+                    <label class="option" for="option1">Player</label>
+                    <input id="option2" name="options" type="radio" />
+                    <label class="option" for="option2">Coach</label>
+                    <span class="background"></span>
+                </div>
+
                 <label for="name">Name:</label>
                 <input type="name" id="name" placeholder="Enter your name" required>
 
@@ -39,11 +49,11 @@
                 <label for="create-password">Password:</label>
                 <input type="password" id="create-password" placeholder="Create your password" required>
 
-                <label for="role">Choose a role:</label>
+                <!-- <label for="role">Choose a role:</label>
                 <select name="role" id="role">
                         <option value="player">Player</option>
                         <option value="coach">Coach</option>
-                </select>   
+                </select>    -->
 
                 <button type="submit" class="button">Create Account</button>
             </form>

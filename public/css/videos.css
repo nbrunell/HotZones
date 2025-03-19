@@ -1,7 +1,7 @@
 body {
     font-family: Arial, sans-serif;
     background-color: #121212;
-    color: #fff;
+    color: #d67214;
     margin: 0;
     padding: 5px;
 }
@@ -76,4 +76,6 @@ iframe {
 
 p {
   padding: 5px;
+  font-size: large;
+  color: #d67214;
 }

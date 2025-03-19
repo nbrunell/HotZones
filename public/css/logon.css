@@ -92,3 +92,57 @@ select{
 .error {
     color: red;
 }
+
+/*This is the styling for the coach/player radio button*/
+.filter-switch {
+    border: 2px solid #d67214;
+    border-radius: 30px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    height: 40px;
+    width: 400px;
+    overflow: hidden;
+  }
+  .filter-switch input {
+    display: none;
+  }
+  .filter-switch label {
+    flex: 1;
+    text-align: center;
+    cursor: pointer;
+    border: none;
+    border-radius: 30px;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    transition: all 0.5s;
+    font-weight: 500;
+    font-size: 16px;
+  }
+  .filter-switch .background {
+    position: absolute;
+    width: 49%;
+    height: 32px;
+    background-color: #d67214;
+    top: 4px;
+    left: 4px;
+    border-radius: 30px;
+    transition: left 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+  #option2:checked ~ .background {
+    left: 50%;
+  }
+  #option1:checked + label[for="option1"] {
+    color: #212121;
+    font-weight: bold;
+  }
+  #option2:checked + label[for="option2"] {
+    color: #212121;
+    font-weight: bold;
+  }
+  #option1:not(:checked) + label[for="option1"],
+  #option2:not(:checked) + label[for="option2"] {
+    color: #7d7d7d;
+  }
+  /*END STYLING FOR RADIO BUTTON*/
