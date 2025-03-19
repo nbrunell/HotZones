@@ -47,16 +47,13 @@ document.addEventListener('DOMContentLoaded', () => {
    });
 
    //////////////////////////////////////////////////
-   // EVENT LISTENERS FOR LOGOUT & REFRESH BUTTONS
+   // EVENT LISTENERS FOR LOGOUT 
    //////////////////////////////////////////////////
    logoutButton.addEventListener('click', () => {
        localStorage.removeItem('token');
        window.location.href = '/';
    });
 
-   refreshButton.addEventListener('click', async () => {
-       renderUserList();
-   });
 
   //////////////////////////////////////////
   //END ELEMENTS TO ATTACH EVENT LISTENERS
@@ -72,10 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
     window.location.href = '/';
   });
 
-  // Refresh list when the button is clicked
-  refreshButton.addEventListener('click', async () => {
-    renderUserList();
-  });
+
   //////////////////////////////////////////
   //END EVENT LISTENERS
   //////////////////////////////////////////
