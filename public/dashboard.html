@@ -108,9 +108,9 @@
         <p>Enter your shooting data: </p>
         <form id="shooting-data-form">
           <div class="input-container">
-            <input type="number" id="input-shots-made" placeholder="Shots made" required>
+            <input type="number" id="input-shots-made" placeholder="Shots Made" value="0" min="0" required>
             <span>/</span>
-            <input type="number" id="input-total-shots" placeholder="Shots taken" required>
+            <input type="number" id="input-total-shots" placeholder="Shots Taken" value="0" min="0" required>
           </div>
           <div class="button-container">
             <button type="button" id="made-shot-button">✔</button>
@@ -147,6 +147,7 @@
     })
   </script>
 
+  <!-- Script for make and miss buttons updating input form -->
   <script>
     document.getElementById("made-shot-button").addEventListener("click", function() {
       let made = document.getElementById("input-shots-made");
