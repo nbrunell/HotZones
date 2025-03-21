@@ -120,7 +120,56 @@ const DataModel = (function () {
                 console.error("Error in API call:", error);
                 return { success: false };
             }
+        },
+        // New function: Insert a new zone log record
+        updateZoneLogs: async function (zoneData) {
+            if (!token) {
+                console.error("Token is not set.");
+                return { success: false };
+            }
+            try {
+                const response = await fetch('/api/zone-logs', {
+                    method: 'POST', // Using POST to insert a new record
+                    headers: {
+                        'Authorization': token,
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(zoneData),
+                });
+                if (!response.ok) {
+                    console.error("Error updating zone logs:", await response.json());
+                    return { success: false };
+                }
+                const data = await response.json();
+                return data;
+            } catch (error) {
+                console.error("Error in API call:", error);
+                return { success: false };
+            }
+        },
+        getZoneLogs: async function () {
+            if (!token) {
+                console.error("Token is not set.");
+                return [];
+            }
+            try {
+                const response = await fetch('/api/zone-logs', {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': token,
+                        'Content-Type': 'application/json',
+                    },
+                });
+                if (!response.ok) {
+                    console.error("Error retrieving zone logs:", await response.json());
+                    return [];
+                }
+                const data = await response.json();
+                return data.zoneStats; // expecting { zoneStats: [...] }
+            } catch (error) {
+                console.error("Error in API call:", error);
+                return [];
+            }
         }
-
     };
 })();

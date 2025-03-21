@@ -15,44 +15,78 @@ document.addEventListener('DOMContentLoaded', () => {
   const logoutButton = document.getElementById('logoutButton');
   const refreshButton = document.getElementById('refreshButton');
 
-   // Add modal elements
-   const modal = document.getElementById('customModal');
-   const modalTitle = document.getElementById('modalZoneTitle');
-   const closeModal = document.querySelector('.close-modal');
+  // Add modal elements
+  const modal = document.getElementById('customModal');
+  const modalTitle = document.getElementById('modalZoneTitle');
+  const closeModal = document.querySelector('.close-modal');
 
-   //////////////////////////////////////////////////
-   // ATTACH CLICK EVENTS FOR ZONES
-   //////////////////////////////////////////////////
-   document.querySelectorAll('.s0').forEach(zone => {
-       zone.addEventListener('click', function () {
-           modalTitle.innerText = "Zone: " + this.id; // Update modal title
-           modal.style.display = 'flex'; // Show modal
-       });
-   });
+  //////////////////////////////////////////////////
+  // ATTACH CLICK EVENTS FOR ZONES
+  //////////////////////////////////////////////////
+  document.querySelectorAll('.s0').forEach(zone => {
+    zone.addEventListener('click', function () {
+      modalTitle.innerText = "Zone: " + this.id; // Update modal title
+      modal.style.display = 'flex'; // Show modal
+    });
+  });
 
-   //////////////////////////////////////////////////
-   // CLOSE MODAL WHEN CLICKING CLOSE BUTTON
-   //////////////////////////////////////////////////
-   closeModal.addEventListener('click', function () {
-       modal.style.display = 'none';
-   });
+  //////////////////////////////////////////////////
+  // CLOSE MODAL WHEN CLICKING CLOSE BUTTON
+  //////////////////////////////////////////////////
+  closeModal.addEventListener('click', function () {
+    modal.style.display = 'none';
+  });
 
-   //////////////////////////////////////////////////
-   // CLOSE MODAL WHEN CLICKING OUTSIDE OF IT
-   //////////////////////////////////////////////////
-   window.addEventListener('click', function (e) {
-       if (e.target === modal) {
-           modal.style.display = 'none';
-       }
-   });
+  //////////////////////////////////////////////////
+  // CLOSE MODAL WHEN CLICKING OUTSIDE OF IT
+  //////////////////////////////////////////////////
+  window.addEventListener('click', function (e) {
+    if (e.target === modal) {
+      modal.style.display = 'none';
+    }
+  });
 
-   //////////////////////////////////////////////////
-   // EVENT LISTENERS FOR LOGOUT 
-   //////////////////////////////////////////////////
-   logoutButton.addEventListener('click', () => {
-       localStorage.removeItem('token');
-       window.location.href = '/';
-   });
+  //////////////////////////////////////////////////
+  // EVENT LISTENERS FOR LOGOUT 
+  //////////////////////////////////////////////////
+  logoutButton.addEventListener('click', () => {
+    localStorage.removeItem('token');
+    window.location.href = '/';
+  });
+
+
+  // NEW: Attach event listener for the shooting data form (modal)
+  document.getElementById('shooting-data-form').addEventListener('submit', async function (event) {
+    event.preventDefault();
+
+    // Get the zone name from the modal title (assumes "Zone: [ZoneName]" format)
+    const modalTitleText = document.getElementById('modalZoneTitle').innerText;
+    const zoneName = modalTitleText.replace('Zone: ', '');
+
+    const shotsMade = document.getElementById('input-shots-made').value;
+    const shotsTaken = document.getElementById('input-total-shots').value;
+
+    // Debug: Log the captured data
+    console.log('Zone Data:', { zone: zoneName, shots_made: shotsMade, shots_taken: shotsTaken });
+
+    const zoneData = {
+      zone: zoneName,
+      shots_made: parseInt(shotsMade, 10),
+      shots_taken: parseInt(shotsTaken, 10)
+    };
+
+    // Call DataModel to insert a new zone log record
+    const result = await DataModel.updateZoneLogs(zoneData);
+    if (result && result.message) {
+      console.log(result.message);
+      // Clear the form and hide the modal
+      document.getElementById('shooting-data-form').reset();
+      document.getElementById('customModal').style.display = 'none';
+      // Optionally, refresh the displayed zone logs
+      renderZoneLogs();
+    }
+  });
+
 
 
   //////////////////////////////////////////

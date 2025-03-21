@@ -216,6 +216,58 @@ app.put('/api/profile', authenticateToken, async (req, res) => {
     }
 });
 
+// Route: Update or Insert Zone Stats (Upsert)
+// server.js
+app.post('/api/zone-logs', authenticateToken, async (req, res) => {
+    const { zone, shots_made, shots_taken } = req.body;
+    if (!zone || shots_made === undefined || shots_taken === undefined) {
+        return res.status(400).json({ message: 'Zone, shots made, and shots taken are required.' });
+    }
+    try {
+        const connection = await createConnection();
+        const query = `
+            INSERT INTO user_zone_logs (user_email, zone, shots_made, shots_taken)
+            VALUES (?, ?, ?, ?)
+        `;
+        await connection.execute(query, [
+            req.user.email,
+            zone,
+            shots_made,
+            shots_taken
+        ]);
+        await connection.end();
+        res.status(201).json({ message: 'New shot log created successfully!' });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Error inserting new shot log.' });
+    }
+});
+
+
+
+// Route: Get Zone Stats for the Current User
+app.get('/api/zone-logs', authenticateToken, async (req, res) => {
+    try {
+        const connection = await createConnection();
+        const [rows] = await connection.execute(`
+            SELECT 
+                zone, 
+                SUM(shots_made) AS total_made, 
+                SUM(shots_taken) AS total_taken
+            FROM user_zone_logs
+            WHERE user_email = ?
+            GROUP BY zone
+        `, [req.user.email]);
+        await connection.end();
+        res.status(200).json({ zoneStats: rows });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Error retrieving zone logs.' });
+    }
+});
+
+
+
 //////////////////////////////////////
 //END ROUTES TO HANDLE API REQUESTS
 //////////////////////////////////////
