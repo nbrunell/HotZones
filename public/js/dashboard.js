@@ -6,6 +6,54 @@
 
 
 //ADD ALL EVENT LISTENERS INSIDE DOMCONTENTLOADED
+
+// Function to calculate zone percentage and display it on zonemap
+async function renderZonePercentages() {
+  const zoneStats = await DataModel.getZoneLogs();
+  const svg = document.querySelector('svg');
+
+  // Clear old labels
+  const labelGroup = document.getElementById("labels");
+  labelGroup.innerHTML = ""; 
+
+  // Map display names to your path IDs
+  const coords = {
+    "Top of the Key": { x: 635, y: 880 },
+    "Free Throw": { x: 635, y: 615 },
+    "Left Wing": { x: 75, y: 510 },
+    "Right Wing": { x: 1192, y: 510 },
+    "Left Mid": { x: 280, y: 380 },
+    "Right Mid": { x: 970, y: 380 },
+    "Left Corner": { x: 40, y: 200 },
+    "Right Corner": { x: 1220, y: 200 },
+    "Left Baseline": { x: 272, y: 115 },
+    "Right Baseline": { x: 980, y: 115 },
+    "Paint": {x: 635, y: 280}
+  };
+
+  zoneStats.forEach(stat => {
+    const { zone, total_made, total_taken } = stat;
+    const percentage = total_taken > 0 ? (total_made / total_taken * 100).toFixed(1) : "0.0";
+
+    if (!coords[zone]) return;
+
+    const { x, y } = coords[zone];
+    const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
+    text.setAttribute("x", x);
+    text.setAttribute("y", y);
+    text.setAttribute("text-anchor", "middle");
+    text.setAttribute("fill", "white")
+    text.setAttribute("font-size", "24");
+    text.setAttribute("font-weight", "bold"); 
+    text.setAttribute("class", "zone-percent-label");
+    text.textContent = `${percentage}%`;
+
+    const labelGroup = document.getElementById("labels");
+    labelGroup.appendChild(text); 
+  }); 
+}
+
+
 //AT THE BOTTOM OF DOMCONTENTLOADED, ADD ANY CODE THAT NEEDS TO RUN IMMEDIATELY
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -83,7 +131,7 @@ document.addEventListener('DOMContentLoaded', () => {
       document.getElementById('shooting-data-form').reset();
       document.getElementById('customModal').style.display = 'none';
       // Optionally, refresh the displayed zone logs
-      renderZoneLogs();
+      renderZonePercentages();
     }
   });
 
@@ -118,7 +166,7 @@ document.addEventListener('DOMContentLoaded', () => {
     window.location.href = '/';
   } else {
     DataModel.setToken(token);
-    renderUserList();
+    renderZonePercentages();
   }
   //////////////////////////////////////////
   //END CODE THAT NEEDS TO RUN IMMEDIATELY AFTER PAGE LOADS
@@ -130,17 +178,17 @@ document.addEventListener('DOMContentLoaded', () => {
 //////////////////////////////////////////
 //FUNCTIONS TO MANIPULATE THE DOM
 //////////////////////////////////////////
-async function renderUserList() {
-  const userListElement = document.getElementById('userList');
-  userListElement.innerHTML = '<div class="loading-message">Loading user list...</div>';
-  const users = await DataModel.getUsers();
-  users.forEach(user => {
-    const userItem = document.createElement('div');
-    userItem.classList.add('user-item');
-    userItem.textContent = user;
-    userListElement.appendChild(userItem);
-  });
-}
+// async function renderUserList() {
+//   const userListElement = document.getElementById('userList');
+//   userListElement.innerHTML = '<div class="loading-message">Loading user list...</div>';
+//   const users = await DataModel.getUsers();
+//   users.forEach(user => {
+//     const userItem = document.createElement('div');
+//     userItem.classList.add('user-item');
+//     userItem.textContent = user;
+//     userListElement.appendChild(userItem);
+//   });
+// }
 
 async function loadUserProfile() {
   const profileData = await DataModel.getProfile();
