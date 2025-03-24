@@ -37,6 +37,18 @@ async function renderZonePercentages() {
 
     if (!coords[zone]) return;
 
+
+    if (percentage >= 70) fillColor = "green";
+    else if (percentage >= 55) fillColor = "#fcca20";
+    else if (percentage >= 40) fillColor = "#fd6214";
+    else if (percentage >= 20) fillColor = "#ee1b0b";
+    else fillColor = "darkred"; 
+
+    const zonePath = document.getElementById(zone);
+    if (zonePath) {
+      zonePath.setAttribute("fill", fillColor);
+    }
+    
     const { x, y } = coords[zone];
     const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
     text.setAttribute("x", x);
@@ -111,8 +123,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const modalTitleText = document.getElementById('modalZoneTitle').innerText;
     const zoneName = modalTitleText.replace('Zone: ', '');
 
-    const shotsMade = document.getElementById('input-shots-made').value;
-    const shotsTaken = document.getElementById('input-total-shots').value;
+    const shotsMade = parseInt(document.getElementById('input-shots-made').value, 10);
+    const shotsTaken = parseInt(document.getElementById('input-total-shots').value, 10);
+
+    // ✅ Validation: prevent bad data
+    if (shotsMade > shotsTaken) {
+      alert("Shots made cannot be more than shots taken.");
+      return;
+    }
 
     // Debug: Log the captured data
     console.log('Zone Data:', { zone: zoneName, shots_made: shotsMade, shots_taken: shotsTaken });

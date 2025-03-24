@@ -136,12 +136,13 @@ h1 {
   height: auto;
 }
 
-svg path{
+svg path {
   cursor: pointer;
+  transition: filter 0.2s ease;
 }
 
-svg path:hover{
-  fill:#d67214
+svg path:hover {
+  filter: brightness(1.5) drop-shadow(0 0 5px white);
 }
 
 #name{

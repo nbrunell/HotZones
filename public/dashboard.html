@@ -66,7 +66,6 @@
         <style>
           .s0 {
             fill-opacity: .7;
-            fill: #808080;
             stroke: #000000;
             stroke-miterlimit: 100;
             stroke-width: 5
@@ -139,15 +138,10 @@
           document.getElementById("name").style.left = (x + 15) + "px";
         }
 
-        e.style.fill = "#d67214"
         document.getElementById("name").style.opacity = 1;
         document.getElementById("namep").innerText = e.id;
       })
 
-      e.addEventListener("mouseleave", function () {
-        e.style.fill = "#808080"
-        document.getElementById("name").style.opacity = 0
-      })
     })
   </script>
 
