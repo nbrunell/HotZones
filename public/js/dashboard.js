@@ -53,9 +53,9 @@ async function renderZonePercentages() {
     if (!coords[zone]) return;
 
 
-    if (percentage >= 70) fillColor = "green";
+    if (percentage >= 75) fillColor = "green";
     else if (percentage >= 55) fillColor = "#fcca20";
-    else if (percentage >= 40) fillColor = "#fd6214";
+    else if (percentage >= 35) fillColor = "#fd6214";
     else if (percentage >= 20) fillColor = "#ee1b0b";
     else fillColor = "darkred"; 
 
