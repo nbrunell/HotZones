@@ -1,71 +1,121 @@
 body {
     background-color: #121212;
     color: #fff;
-}
-
-.stats-header {
-    display: flex;
+    font-family: Arial, sans-serif;
+    display: flex; /* Use flexbox to manage layout */
+    flex-direction: column;
     align-items: center;
-    margin-bottom: 1rem;
+    height: 100vh; /* Ensure the body takes up the full height */
+    margin: 0;
+    padding: 0;
 }
 
-.back-button {
-    background: none;
-    border: none;
-    color: #fff;
-    font-size: 1.5rem;
-    margin-right: 0.75rem;
+/* Styling for the hamburger menu */
+#hamburger {
+    fill: white;
+    height: 38px;
+    width: 38px;
+    margin: 10px;
+    cursor: pointer;
+    position: absolute; /* Ensure it's positioned absolutely */
+    left: 1rem; /* Align it to the left */
 }
 
-.back-button:hover {
-    color: #bbb;
-}
-
-.week-row {
-    background-color: #1f1f1f;
-    border-radius: 0.5rem;
+/* Sidebar styling */
+#sidebar {
+    width: 0px;
+    height: 100vh;
+    background-color: #d67214;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 2;
     overflow: hidden;
+    transition: width 0.5s ease;
+    white-space: nowrap;
 }
 
-.day-box {
-    flex: 1;
-    text-align: center;
-    padding: 0.75rem 0;
-    font-weight: 500;
+.sidebar-item {
+    text-decoration: none;
+    color: black;
+    display: flex;
+    padding: 1em;
+    align-items: center;
     cursor: pointer;
 }
 
-.day-box:hover {
-    background-color: #2c2c2c;
+.sidebar-item:hover {
+    background-color: #9a520f;
 }
 
-.selected-day {
-    background-color: #d67214;
-    color: #fff;
+.sidebar-item > div {
+    padding: 0 1em;
 }
 
-.court-container {
-    text-align: center;
-    margin: 1.5rem 0;
+.sidebar-item svg {
+    flex-shrink: 0;
 }
 
-.court-img {
-    max-width: 100%;
-    height: auto;
+#overlay {
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.4);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    display: none;
 }
 
-.advanced-stats {
+/* Top Bar */
+.top-bar-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; /* Align content to the left */
+    padding: 2rem;
     background-color: #1f1f1f;
-    border-radius: 0.5rem;
-    padding: 0.75rem;
-    text-align: center;
-    font-weight: 500;
+    position: relative;
+    width: 100%; /*Ensure it takes full width */
+    /* z-index: 3; Ensure the top bar is above other content */
 }
 
-.advanced-stats:hover {
-    background-color: #2c2c2c;
+.top-bar {
+    display: flex;
+    flex-grow: 1;
+    justify-content: center;
 }
 
-.m-0 {
-    padding-left: 0.5rem ;
+.top-bar h5 {
+    margin: 0;
+    font-size: 1.2rem;
+    color: white;
+}
+
+/* Chart Styling */
+.chart-container {
+    width: 80%;
+    max-width: 1200px; /* Optional: limit max width for larger screens */
+    height: 500px;
+    margin: 20px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.chart-container canvas {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+/* Filter container */
+.filter-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.filter-container select {
+    padding: 10px;
+    margin-right: 10px;
+    font-size: 16px;
 }
