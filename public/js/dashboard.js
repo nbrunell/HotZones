@@ -7,6 +7,21 @@
 
 //ADD ALL EVENT LISTENERS INSIDE DOMCONTENTLOADED
 
+
+// function to place user's name on dashboard
+async function renderUserName() {
+  const profileData = await DataModel.getProfile();
+
+  const userName = profileData.name || "User";
+
+  const introName = document.getElementById("introduction");
+  
+  const text = document.createElement("h1");
+  text.textContent = `Hi ${userName}!`;
+
+  introName.appendChild(text);
+}
+
 // Function to calculate zone percentage and display it on zonemap
 async function renderZonePercentages() {
   const zoneStats = await DataModel.getZoneLogs();
@@ -126,7 +141,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const shotsMade = parseInt(document.getElementById('input-shots-made').value, 10);
     const shotsTaken = parseInt(document.getElementById('input-total-shots').value, 10);
 
-    // ✅ Validation: prevent bad data
+    // Validation: prevent more shots made than taken
     if (shotsMade > shotsTaken) {
       alert("Shots made cannot be more than shots taken.");
       return;
@@ -185,6 +200,7 @@ document.addEventListener('DOMContentLoaded', () => {
   } else {
     DataModel.setToken(token);
     renderZonePercentages();
+    renderUserName();
   }
   //////////////////////////////////////////
   //END CODE THAT NEEDS TO RUN IMMEDIATELY AFTER PAGE LOADS
