@@ -919,7 +919,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 datasets: [{
                     label: 'Basketball Shot Accuracy (%)',
                     data: accuracyData,
-                    borderColor: '#ff5733',
+                    borderColor: '#d67214',
                     backgroundColor: 'rgba(255, 87, 51, 0.2)',
                     fill: true,
                     tension: 0.4,
@@ -971,8 +971,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 datasets: [{
                     label: 'Number of Shots Taken in Each Zone',
                     data: shots,
-                    backgroundColor: '#ff5733',
-                    borderColor: '#ff5733',
+                    backgroundColor: '#d67214',
+                    borderColor: '#d67214',
                     borderWidth: 1,
                 }]
             },
@@ -1011,7 +1011,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 datasets: [{
                     label: 'Shot Accuracy (%)',
                     data: accuracy,
-                    borderColor: '#ff5733',
+                    borderColor: '#d67214',
                     backgroundColor: 'rgba(255, 87, 51, 0.2)',
                     borderWidth: 1,
                     fill: true

@@ -105,6 +105,7 @@ body {
 .chart-container canvas {
     width: 100% !important;
     height: 100% !important;
+    margin-bottom: 30px;
 }
 
 /* Filter container */
@@ -112,6 +113,7 @@ body {
     display: flex;
     justify-content: center;
     margin-bottom: 20px;
+    margin-top: 20px;
 }
 
 .filter-container select {
@@ -119,3 +121,4 @@ body {
     margin-right: 10px;
     font-size: 16px;
 }
+
