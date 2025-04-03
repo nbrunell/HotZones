@@ -79,6 +79,37 @@ async function authenticateToken(req, res, next) {
         }
     });
 }
+
+
+const multer = require('multer');
+const path = require('path');
+
+// Configure Multer storage engine
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        // Save uploads to the /public/uploads folder
+        cb(null, path.join(__dirname, 'public', 'uploads'));
+    },
+    filename: function (req, file, cb) {
+        const ext = path.extname(file.originalname);
+        // Create a unique file name using user's email (sanitized) and a timestamp
+        const uniqueName = req.user.email.replace(/[@.]/g, '_') + '-' + Date.now() + ext;
+        cb(null, uniqueName);
+    }
+});
+
+// File filter: only allow PNG and JPEG images
+const fileFilter = (req, file, cb) => {
+    if (file.mimetype === 'image/png' || file.mimetype === 'image/jpeg') {
+        cb(null, true);
+    } else {
+        cb(new Error('Invalid file type. Only PNG and JPEG allowed.'), false);
+    }
+};
+
+// Create the Multer upload middleware
+const upload = multer({ storage: storage, fileFilter: fileFilter });
+
 /////////////////////////////////////////////////
 //END HELPER FUNCTIONS AND AUTHENTICATION MIDDLEWARE
 /////////////////////////////////////////////////
@@ -176,14 +207,12 @@ app.get('/api/users', authenticateToken, async (req, res) => {
     }
 });
 
-//Route: Get current user profile 
-
 // Route: Get Current User Profile
 app.get('/api/profile', authenticateToken, async (req, res) => {
     try {
         const connection = await createConnection();
         const [rows] = await connection.execute(
-            'SELECT email, name, bio, position FROM user WHERE email = ?',
+            'SELECT email, name, bio, position, profile_image FROM user WHERE email = ?',
             [req.user.email]
         );
         await connection.end();
@@ -197,6 +226,7 @@ app.get('/api/profile', authenticateToken, async (req, res) => {
         res.status(500).json({ message: 'Error retrieving profile details.' });
     }
 });
+
 
 
 // Route: Update User Profile
@@ -263,6 +293,25 @@ app.get('/api/zone-logs', authenticateToken, async (req, res) => {
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: 'Error retrieving zone logs.' });
+    }
+});
+
+app.post('/api/upload-profile-image', authenticateToken, upload.single('profileImage'), async (req, res) => {
+    try {
+        if (!req.file) {
+            return res.status(400).json({ message: 'No file uploaded.' });
+        }
+        const imagePath = '/uploads/' + req.file.filename;
+        const connection = await createConnection();
+        await connection.execute(
+            'UPDATE user SET profile_image = ? WHERE email = ?',
+            [imagePath, req.user.email]
+        );
+        await connection.end();
+        res.status(200).json({ message: 'Profile image uploaded successfully!', imageUrl: imagePath });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Error uploading profile image.' });
     }
 });
 

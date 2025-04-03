@@ -48,11 +48,19 @@
                 <div class="row align-items-center">
                     <!-- Left: Profile Photo & Change Picture -->
                     <div class="col-md-4 text-center mb-3 mb-md-0">
-                        <img src="images/link.jpg" alt="User Photo" class="avatar-img" />
+                        <img src="" alt="User Photo" class="avatar-img" id="profileImageDisplay" />
                         <div class="mt-3">
-                            <a href="#" class="change-picture">Change Picture</a>
+                            <!-- Label opens the file explorer when clicked -->
+                            <label for="profile-image" class="change-picture"
+                                style="cursor:pointer; color:blue; text-decoration:underline;">
+                                Change Picture
+                            </label>
+                            <!-- Hidden file input -->
+                            <input type="file" class="form-control" id="profile-image" accept="image/png, image/jpeg"
+                                style="display:none;">
                         </div>
                     </div>
+
                     <!-- Right: Profile Info -->
                     <div class="col-md-8">
                         <h2 id="profile-name-display"></h2>

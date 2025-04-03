@@ -40,6 +40,38 @@ document.addEventListener('DOMContentLoaded', () => {
         DataModel.setToken(token);
         loadUserProfile();
     }
+
+
+    document.getElementById('profile-image').addEventListener('change', async function () {
+        if (!this.files || this.files.length === 0) {
+            alert("Please select an image.");
+            return;
+        }
+        const file = this.files[0];
+        const formData = new FormData();
+        formData.append('profileImage', file);
+
+        try {
+            const response = await fetch('/api/upload-profile-image', {
+                method: 'POST',
+                headers: {
+                    // Do not manually set 'Content-Type' when sending FormData
+                    'Authorization': token
+                },
+                body: formData
+            });
+            const result = await response.json();
+            if (response.ok) {
+                console.log(result.message);
+                // Update the displayed profile image with the new URL from the server
+                document.getElementById('profileImageDisplay').src = result.imageUrl;
+            } else {
+                console.error(result.message);
+            }
+        } catch (error) {
+            console.error('Error uploading image:', error);
+        }
+    });
     //////////////////////////////////////////
     //END CODE THAT NEEDS TO RUN IMMEDIATELY AFTER PAGE LOADS
     //////////////////////////////////////////
@@ -50,6 +82,28 @@ document.addEventListener('DOMContentLoaded', () => {
 //////////////////////////////////////////
 //FUNCTIONS TO MANIPULATE THE DOM
 //////////////////////////////////////////
+
+// Previously was working
+// async function loadUserProfile() {
+//     const profileData = await DataModel.getProfile();
+//     if (profileData.email) {
+//         document.getElementById('profile-email').textContent = profileData.email;
+//     }
+//     if (profileData.name) {
+//         document.getElementById('profile-name-display').textContent = profileData.name;
+//         // Also pre-fill the edit field so the user can see what’s stored
+//         document.getElementById('profile-name').value = profileData.name;
+//     }
+//     if (profileData.bio) {
+//         document.getElementById('profile-bio-display').textContent = profileData.bio;
+//         document.getElementById('profile-bio').value = profileData.bio;
+//     }
+//     if (profileData.position) {
+//         document.getElementById('profile-position-display').textContent = profileData.position;
+//         document.getElementById('profile-position').value = profileData.position;
+//     }
+// }
+
 async function loadUserProfile() {
     const profileData = await DataModel.getProfile();
     if (profileData.email) {
@@ -57,7 +111,6 @@ async function loadUserProfile() {
     }
     if (profileData.name) {
         document.getElementById('profile-name-display').textContent = profileData.name;
-        // Also pre-fill the edit field so the user can see what’s stored
         document.getElementById('profile-name').value = profileData.name;
     }
     if (profileData.bio) {
@@ -68,7 +121,14 @@ async function loadUserProfile() {
         document.getElementById('profile-position-display').textContent = profileData.position;
         document.getElementById('profile-position').value = profileData.position;
     }
+    // NEW: Set the profile image
+    if (profileData.profile_image) {
+        document.getElementById('profileImageDisplay').src = profileData.profile_image;
+    } else {
+        document.getElementById('profileImageDisplay').src = 'images/link.jpg';
+    }
 }
+
 
 
 // Separate async function to update profile when the user confirms save
