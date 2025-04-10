@@ -7,37 +7,34 @@
     <link rel="stylesheet" href="/css/videos.css">
 </head>
 <body>
-    <main>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          height="24"
-          viewBox="0 0 24 24"
-          width="24"
-          id="hamburger"
-        >
+    <div class="top-bar-container">
+      <!-- Hamburger Menu Icon (replaces Go Back button) -->
+      <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24" id="hamburger">
           <path d="M0 0h24v24H0z" fill="none" />
           <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z" />
-        </svg>
-        <div id="overlay"></div>
-        <div id="sidebar">
-          <a href="/dashboard.html" class="sidebar-item">
-            <div>Home</div>
-          </a>
-          <a href="/profileView.html" class="sidebar-item">
-            <div>My Profile</div>
-          </a>
-          <a href="/analytics.html" class="sidebar-item">
-            <div>Analytics</div>
-          </a>
-          <a href="/videos.html" class="sidebar-item">
-            <div>Get Help</div>
-          </a>
-        </div>
-      </main>
-
-     <div class="header">
-        <h1>Video Tutorials</h1>
-     </div> 
+      </svg>
+  
+      <header class="top-bar">
+          <h5>Videos</h5>
+      </header>
+  </div>
+  
+  <!-- Sidebar & Overlay -->
+  <div id="overlay"></div>
+  <div id="sidebar">
+      <a href="/dashboard.html" class="sidebar-item">
+          <div>Home</div>
+      </a>
+      <a href="/profileView.html" class="sidebar-item">
+          <div>My Profile</div>
+      </a>
+      <a href="/analytics.html" class="sidebar-item">
+          <div>Analytics</div>
+      </a>
+      <a href="/videos.html" class="sidebar-item">
+          <div>Get Help</div>
+      </a>
+  </div>
 
     <p>Where to Aim</p>
     <iframe width="475" height="300" src="https://www.youtube.com/embed/nievJITvq_o?si=jQYyDtu9j2VJMo9Z" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>

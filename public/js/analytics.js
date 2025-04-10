@@ -884,25 +884,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     };
 
-    const fetchShotData = () => {
-        return new Promise((resolve) => {
-            const data = [
-                { zone: 'Left Corner', shots: Math.floor(Math.random() * 50) },
-                { zone: 'Left Wing', shots: Math.floor(Math.random() * 50) },
-                { zone: 'Top of the Key', shots: Math.floor(Math.random() * 50) },
-                { zone: 'Right Wing', shots: Math.floor(Math.random() * 50) },
-                { zone: 'Right Corner', shots: Math.floor(Math.random() * 50) },
-                { zone: 'Right Baseline', shots: Math.floor(Math.random() * 50) },
-                { zone: 'Right Mid', shots: Math.floor(Math.random() * 50) },
-                { zone: 'Free Throw', shots: Math.floor(Math.random() * 50) },
-                { zone: 'Left Mid', shots: Math.floor(Math.random() * 50) },
-                { zone: 'Left Baseline', shots: Math.floor(Math.random() * 50) },
-                { zone: 'Paint', shots: Math.floor(Math.random() * 50) }
-            ];
-            resolve(data);
-        });
-    };
-
     // Line chart creation
     const createLineChart = (data) => {
         const labels = data.map(d => d.time);
@@ -955,6 +936,26 @@ document.addEventListener('DOMContentLoaded', function() {
         fetchData(filterType).then(createLineChart);
     });
 
+    // Gets data for bar chart
+    const fetchShotData = async () => {
+        try {
+            console.log("Fetching zone stats...");
+            const zoneStats = await DataModel.getZoneLogs(); // API call with token
+            console.log("Raw zone stats:", zoneStats);
+    
+            const processedData = zoneStats.map(zone => ({
+                zone: zone.zone, // zone name from DB
+                shots: zone.total_taken
+            }));
+    
+            console.log("Processed shot data:", processedData);
+            return processedData;
+        } catch (error) {
+            console.error('Error fetching shot data:', error);
+            return [];
+        }
+    };
+
     // Bar chart creation
     const createBarChart = (data) => {
         const zones = data.map(d => d.zone);
@@ -996,14 +997,90 @@ document.addEventListener('DOMContentLoaded', function() {
     };
 
     // Radar chart creation
-    const createRadarChart = (data) => {
-        const zones = data.map(d => d.zone);
-        const accuracy = data.map(d => d.shots); // Using the number of shots for simplicity
+    // const createRadarChart = (data) => {
+    //     const zones = data.map(d => d.zone);
+    //     const accuracy = data.map(d => d.shots); // Using the number of shots for simplicity
 
+    //     if (radarChart) {
+    //         radarChart.destroy();
+    //     }
+
+    //     radarChart = new Chart(ctxRadarChart, {
+    //         type: 'radar',
+    //         data: {
+    //             labels: zones,
+    //             datasets: [{
+    //                 label: 'Shot Accuracy (%)',
+    //                 data: accuracy,
+    //                 borderColor: '#d67214',
+    //                 backgroundColor: 'rgba(255, 87, 51, 0.2)',
+    //                 borderWidth: 1,
+    //                 fill: true
+    //             }]
+    //         },
+    //         options: {
+    //             plugins: {
+    //                 title: {
+    //                     display: true,
+    //                     text: 'Shot Accuracy Radar Chart',
+    //                     font: { size: 18, weight: 'bold' },
+    //                 },
+    //                 legend: { position: 'right' }
+    //             },
+    //             scales: {
+    //                 r: {
+    //                     min: 0, max: 100, ticks: { stepSize: 20 }
+    //                 }
+    //             },
+    //             responsive: true,
+    //             maintainAspectRatio: false
+    //         }
+    //     });
+    // };
+
+    // Gets data for radar chart
+    const fetchAccuracyData = async () => {
+        try {
+            console.log("Fetching zone stats...");
+            const zoneStats = await DataModel.getZoneLogs(); // API call with token
+            console.log("Raw zone stats:", zoneStats);
+    
+            const processedData = zoneStats.map(zone => ({
+                zone: zone.zone, // zone name from DB
+                shots: zone.total_taken > 0
+                    ? Math.round((zone.total_made / zone.total_taken) * 100)
+                    : 0
+            }));
+    
+            console.log("Processed shot data:", processedData);
+            return processedData;
+        } catch (error) {
+            console.error('Error fetching shot data:', error);
+            return [];
+        }
+    };
+    
+    // Creates Radar Chart
+    const createRadarChart = (data) => {
+        console.log("Creating radar chart with data:", data);
+    
+        const zones = data.map(d => d.zone);
+        const accuracy = data.map(d => d.shots);
+    
+        console.log("Zones:", zones);
+        console.log("Accuracy data:", accuracy);
+    
+        const ctxRadarChart = document.getElementById('shotAccuracyRadarChart')?.getContext('2d');
+    
+        if (!ctxRadarChart) {
+            console.error("Canvas element with ID 'shotAccuracyRadarChart' not found.");
+            return;
+        }
+    
         if (radarChart) {
             radarChart.destroy();
         }
-
+    
         radarChart = new Chart(ctxRadarChart, {
             type: 'radar',
             data: {
@@ -1028,7 +1105,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 },
                 scales: {
                     r: {
-                        min: 0, max: 100, ticks: { stepSize: 20 }
+                        min: 0,
+                        max: 100,
+                        ticks: { stepSize: 20 }
                     }
                 },
                 responsive: true,
@@ -1040,6 +1119,6 @@ document.addEventListener('DOMContentLoaded', function() {
     // Fetch and create the charts
     fetchData('all-time').then(createLineChart);
     fetchShotData().then(createBarChart);
-    fetchShotData().then(createRadarChart); // Create the radar chart as well
+    fetchAccuracyData().then(createRadarChart); // Create the radar chart as well
 });
 
