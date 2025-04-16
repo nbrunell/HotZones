@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coach Hub</title>
+    <link rel="stylesheet" href="/css/coach.css">
+</head>
+
+<body>
+      <!--Everything in main currently contains code for the hamburger menu-->
+    <main>
+        <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24" id="hamburger">
+        <path d="M0 0h24v24H0z" fill="none" />
+        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z" />
+        </svg>
+        <div id="overlay"></div>
+        <div id="sidebar">
+        <a href="/dashboard.html" class="sidebar-item">
+            <div>Home</div>
+        </a>
+        <a href="/profileView.html" class="sidebar-item">
+            <div>My Profile</div>
+        </a>
+        <a href="/analytics.html" class="sidebar-item">
+            <div>Analytics</div>
+        </a>
+        <a href="/videos.html" class="sidebar-item">
+            <div>Get Help</div>
+        </a>
+        <a href="/coach.html" class="sidebar-item">
+            <div>Coaches Hub</div>
+        </a>
+        </div>
+    </main>
+  <!--END OF CODE FOR MENU-->
+
+    <div class="court-container">
+        <img id="court" src="./images/Drawable_Court.png" alt="courtDrawing">
+        <canvas id="drawingCanvas"></canvas>
+    </div>
+
+    <script src="/js/coach.js"></script>
+</body>
+
+</html>
