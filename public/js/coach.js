@@ -61,3 +61,7 @@ overlay.addEventListener('click', function () {
   }
 })
 // END OF MENU//
+
+document.getElementById('clearBtn').addEventListener('click', () => {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+  });

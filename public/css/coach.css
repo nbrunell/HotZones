@@ -78,3 +78,18 @@ body {
     display: none;
   }
 /*END OF STYLING FOR HAMBURGER MENU*/
+
+#clearBtn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    z-index: 10;
+    padding: 10px 15px;
+    background-color: #d67214;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 0 5px rgba(0,0,0,0.3);   
+}
