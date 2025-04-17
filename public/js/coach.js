@@ -4,8 +4,8 @@ const ctx = canvas.getContext('2d');
 
 // Match canvas to image size
 img.onload = () => {
-  canvas.width = img.width;
-  canvas.height = img.height;
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
 };
 
 let drawing = false;
