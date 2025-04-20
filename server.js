@@ -212,7 +212,7 @@ app.get('/api/profile', authenticateToken, async (req, res) => {
     try {
         const connection = await createConnection();
         const [rows] = await connection.execute(
-            'SELECT email, name, bio, position, profile_image FROM user WHERE email = ?',
+            'SELECT email, name, bio, position, profile_image, role FROM user WHERE email = ?',
             [req.user.email]
         );
         await connection.end();
@@ -231,12 +231,12 @@ app.get('/api/profile', authenticateToken, async (req, res) => {
 
 // Route: Update User Profile
 app.put('/api/profile', authenticateToken, async (req, res) => {
-    const { name, bio, position } = req.body;
+    const { name, bio, position, role } = req.body;
     try {
         const connection = await createConnection();
         await connection.execute(
-            'UPDATE user SET name = ?, bio = ?, position = ? WHERE email = ?',
-            [name, bio, position, req.user.email]
+            'UPDATE user SET name = ?, bio = ?, position = ?, role = ? WHERE email = ?',
+            [name, bio, position, role, req.user.email]
         );
         await connection.end();
         res.status(200).json({ message: 'Profile updated successfully!' });

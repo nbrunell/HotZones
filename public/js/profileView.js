@@ -121,6 +121,12 @@ async function loadUserProfile() {
         document.getElementById('profile-position-display').textContent = profileData.position;
         document.getElementById('profile-position').value = profileData.position;
     }
+
+    if (profileData.role) {
+        document.getElementById('profile-role-display').textContent = profileData.role;
+        document.getElementById('profile-role').value = profileData.role;
+    }
+
     // NEW: Set the profile image
     if (profileData.profile_image) {
         document.getElementById('profileImageDisplay').src = profileData.profile_image;
@@ -137,9 +143,10 @@ async function updateUserProfile() {
     const name = document.getElementById('profile-name').value;
     const bio = document.getElementById('profile-bio').value;
     const position = document.getElementById('profile-position').value;
+    const role = document.getElementById('profile-role').value;
 
     // Send the update to the server
-    const result = await DataModel.updateProfile({ name, bio, position });
+    const result = await DataModel.updateProfile({ name, bio, position, role });
     if (result && result.message) {
         console.log(result.message);
         // Reload the profile details so the updated values appear

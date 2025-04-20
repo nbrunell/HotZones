@@ -15,7 +15,7 @@ async function renderUserName() {
   const userName = profileData.name || "User";
 
   const introName = document.getElementById("introduction");
-  
+
   const text = document.createElement("h1");
   text.textContent = `Hi ${userName}!`;
 
@@ -29,7 +29,7 @@ async function renderZonePercentages() {
 
   // Clear old labels
   const labelGroup = document.getElementById("labels");
-  labelGroup.innerHTML = ""; 
+  labelGroup.innerHTML = "";
 
   // Map display names to your path IDs
   const coords = {
@@ -43,7 +43,7 @@ async function renderZonePercentages() {
     "Right Corner": { x: 1220, y: 200 },
     "Left Baseline": { x: 272, y: 115 },
     "Right Baseline": { x: 980, y: 115 },
-    "Paint": {x: 635, y: 280}
+    "Paint": { x: 635, y: 280 }
   };
 
   zoneStats.forEach(stat => {
@@ -57,13 +57,13 @@ async function renderZonePercentages() {
     else if (percentage >= 55) fillColor = "#fcca20";
     else if (percentage >= 35) fillColor = "#fd6214";
     else if (percentage >= 20) fillColor = "#ee1b0b";
-    else fillColor = "darkred"; 
+    else fillColor = "darkred";
 
     const zonePath = document.getElementById(zone);
     if (zonePath) {
       zonePath.setAttribute("fill", fillColor);
     }
-    
+
     const { x, y } = coords[zone];
     const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
     text.setAttribute("x", x);
@@ -71,13 +71,13 @@ async function renderZonePercentages() {
     text.setAttribute("text-anchor", "middle");
     text.setAttribute("fill", "white")
     text.setAttribute("font-size", "24");
-    text.setAttribute("font-weight", "bold"); 
+    text.setAttribute("font-weight", "bold");
     text.setAttribute("class", "zone-percent-label");
     text.textContent = `${percentage}%`;
 
     const labelGroup = document.getElementById("labels");
-    labelGroup.appendChild(text); 
-  }); 
+    labelGroup.appendChild(text);
+  });
 }
 
 
