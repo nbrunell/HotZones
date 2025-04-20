@@ -61,27 +61,27 @@ const overlay = document.getElementById('overlay')
 let menuOpen = false
 
 function openMenu() {
-  menuOpen = true
-  overlay.style.display = 'block'
-  sidebar.style.width = '250px'
+    menuOpen = true
+    overlay.style.display = 'block'
+    sidebar.style.width = '250px'
 }
 
 function closeMenu() {
-  menuOpen = false
-  overlay.style.display = 'none'
-  sidebar.style.width = '0px'
+    menuOpen = false
+    overlay.style.display = 'none'
+    sidebar.style.width = '0px'
 }
 
 hamburger.addEventListener('click', function () {
-  if (!menuOpen) {
-    openMenu()
-  }
+    if (!menuOpen) {
+        openMenu()
+    }
 })
 
 overlay.addEventListener('click', function () {
-  if (menuOpen) {
-    closeMenu()
-  }
+    if (menuOpen) {
+        closeMenu()
+    }
 })
 // END OF MENU//
 
@@ -280,117 +280,117 @@ document.getElementById('allTimeFilter').addEventListener('change', (e) => {
  createBarChart(shotData);
  */
 
- /*
- // --- Line Chart: Basketball Shot Accuracy Over Time ---
+/*
+// --- Line Chart: Basketball Shot Accuracy Over Time ---
 const ctxLineChart = document.getElementById('accuracyChart').getContext('2d');
 let accuracyChart;
 
 const fetchData = (filterType) => {
-    return new Promise((resolve) => {
-        let data = [];
-        if (filterType === 'day') {
-            const daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-            for (let i = 0; i < 7; i++) {
-                data.push({ time: daysOfWeek[i], accuracy: Math.random() * 100 });
-            }
-        } else if (filterType === 'month') {
-            const daysInMonth = Array.from({ length: 31 }, (_, i) => i + 1); // Days 1-31
-            for (let i = 0; i < daysInMonth.length; i++) {
-                data.push({ time: `${daysInMonth[i]}`, accuracy: Math.random() * 100 });
-            }
-        } else if (filterType === 'week') {
-            const daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-            for (let i = 0; i < 7; i++) {
-                data.push({ time: daysOfWeek[i], accuracy: Math.random() * 100 });
-            }
-        } else if (filterType === 'all-time') {
-            for (let i = 0; i < 10; i++) {
-                data.push({ time: `Game ${i + 1}`, accuracy: Math.random() * 100 });
-            }
-        }
-        resolve(data);
-    });
+   return new Promise((resolve) => {
+       let data = [];
+       if (filterType === 'day') {
+           const daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+           for (let i = 0; i < 7; i++) {
+               data.push({ time: daysOfWeek[i], accuracy: Math.random() * 100 });
+           }
+       } else if (filterType === 'month') {
+           const daysInMonth = Array.from({ length: 31 }, (_, i) => i + 1); // Days 1-31
+           for (let i = 0; i < daysInMonth.length; i++) {
+               data.push({ time: `${daysInMonth[i]}`, accuracy: Math.random() * 100 });
+           }
+       } else if (filterType === 'week') {
+           const daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+           for (let i = 0; i < 7; i++) {
+               data.push({ time: daysOfWeek[i], accuracy: Math.random() * 100 });
+           }
+       } else if (filterType === 'all-time') {
+           for (let i = 0; i < 10; i++) {
+               data.push({ time: `Game ${i + 1}`, accuracy: Math.random() * 100 });
+           }
+       }
+       resolve(data);
+   });
 };
 
 const createLineChart = (data) => {
-    const labels = data.map(d => d.time);
-    const accuracyData = data.map(d => d.accuracy);
+   const labels = data.map(d => d.time);
+   const accuracyData = data.map(d => d.accuracy);
 
-    if (accuracyChart) {
-        accuracyChart.destroy();
-    }
+   if (accuracyChart) {
+       accuracyChart.destroy();
+   }
 
-    accuracyChart = new Chart(ctxLineChart, {
-        type: 'line',
-        data: {
-            labels: labels,
-            datasets: [{
-                label: 'Basketball Shot Accuracy (%)',
-                data: accuracyData,
-                borderColor: '#ff5733',
-                backgroundColor: 'rgba(255, 87, 51, 0.2)',
-                fill: true,
-                tension: 0.4,
-            }]
-        },
-        options: {
-            plugins: {
-                title: {
-                    display: true,
-                    text: 'Average Basketball Shot Accuracy Over Time',
-                    font: {
-                        size: 18,
-                        weight: 'bold',
-                    },
-                },
-                legend: {
-                    position: 'right',
-                }
-            },
-            scales: {
-                x: {
-                    title: {
-                        display: true,
-                        text: 'Time'
-                    }
-                },
-                y: {
-                    title: {
-                        display: true,
-                        text: 'Accuracy (%)'
-                    },
-                    min: 0,
-                    max: 100,
-                    ticks: {
-                        stepSize: 10
-                    }
-                }
-            },
-            responsive: true,
-            maintainAspectRatio: false
-        }
-    });
+   accuracyChart = new Chart(ctxLineChart, {
+       type: 'line',
+       data: {
+           labels: labels,
+           datasets: [{
+               label: 'Basketball Shot Accuracy (%)',
+               data: accuracyData,
+               borderColor: '#ff5733',
+               backgroundColor: 'rgba(255, 87, 51, 0.2)',
+               fill: true,
+               tension: 0.4,
+           }]
+       },
+       options: {
+           plugins: {
+               title: {
+                   display: true,
+                   text: 'Average Basketball Shot Accuracy Over Time',
+                   font: {
+                       size: 18,
+                       weight: 'bold',
+                   },
+               },
+               legend: {
+                   position: 'right',
+               }
+           },
+           scales: {
+               x: {
+                   title: {
+                       display: true,
+                       text: 'Time'
+                   }
+               },
+               y: {
+                   title: {
+                       display: true,
+                       text: 'Accuracy (%)'
+                   },
+                   min: 0,
+                   max: 100,
+                   ticks: {
+                       stepSize: 10
+                   }
+               }
+           },
+           responsive: true,
+           maintainAspectRatio: false
+       }
+   });
 };
 
 // Event listeners for the filter selects
 document.getElementById('dayFilter').addEventListener('change', (e) => {
-    const filterType = e.target.value;
-    fetchData(filterType).then(createLineChart);
+   const filterType = e.target.value;
+   fetchData(filterType).then(createLineChart);
 });
 
 document.getElementById('weekFilter').addEventListener('change', (e) => {
-    const filterType = e.target.value;
-    fetchData(filterType).then(createLineChart);
+   const filterType = e.target.value;
+   fetchData(filterType).then(createLineChart);
 });
 
 document.getElementById('monthFilter').addEventListener('change', (e) => {
-    const filterType = e.target.value;
-    fetchData(filterType).then(createLineChart);
+   const filterType = e.target.value;
+   fetchData(filterType).then(createLineChart);
 });
 
 document.getElementById('allTimeFilter').addEventListener('change', (e) => {
-    const filterType = e.target.value;
-    fetchData(filterType).then(createLineChart);
+   const filterType = e.target.value;
+   fetchData(filterType).then(createLineChart);
 });
 
 // --- Bar Chart: Basketball Shot Zones ---
@@ -399,81 +399,81 @@ let shotZonesChart;
 
 // Placeholder function to simulate dynamic shot data fetch (e.g., from a database)
 const fetchShotData = () => {
-    return new Promise((resolve) => {
-        // Simulate database or API response here with dynamic data
-        const data = [
-            { zone: 'Left Corner', shots: Math.floor(Math.random() * 50) },
-            { zone: 'Left Wing', shots: Math.floor(Math.random() * 50) },
-            { zone: 'Top of the Key', shots: Math.floor(Math.random() * 50) },
-            { zone: 'Right Wing', shots: Math.floor(Math.random() * 50) },
-            { zone: 'Right Corner', shots: Math.floor(Math.random() * 50) },
-            { zone: 'Right Baseline', shots: Math.floor(Math.random() * 50) },
-            { zone: 'Right Mid', shots: Math.floor(Math.random() * 50) },
-            { zone: 'Free Throw', shots: Math.floor(Math.random() * 50) },
-            { zone: 'Left Mid', shots: Math.floor(Math.random() * 50) },
-            { zone: 'Left Baseline', shots: Math.floor(Math.random() * 50) },
-            { zone: 'Paint', shots: Math.floor(Math.random() * 50) }
-        ];
-        resolve(data);
-    });
+   return new Promise((resolve) => {
+       // Simulate database or API response here with dynamic data
+       const data = [
+           { zone: 'Left Corner', shots: Math.floor(Math.random() * 50) },
+           { zone: 'Left Wing', shots: Math.floor(Math.random() * 50) },
+           { zone: 'Top of the Key', shots: Math.floor(Math.random() * 50) },
+           { zone: 'Right Wing', shots: Math.floor(Math.random() * 50) },
+           { zone: 'Right Corner', shots: Math.floor(Math.random() * 50) },
+           { zone: 'Right Baseline', shots: Math.floor(Math.random() * 50) },
+           { zone: 'Right Mid', shots: Math.floor(Math.random() * 50) },
+           { zone: 'Free Throw', shots: Math.floor(Math.random() * 50) },
+           { zone: 'Left Mid', shots: Math.floor(Math.random() * 50) },
+           { zone: 'Left Baseline', shots: Math.floor(Math.random() * 50) },
+           { zone: 'Paint', shots: Math.floor(Math.random() * 50) }
+       ];
+       resolve(data);
+   });
 };
 
 const createBarChart = (data) => {
-    const zones = data.map(d => d.zone);
-    const shots = data.map(d => d.shots);
+   const zones = data.map(d => d.zone);
+   const shots = data.map(d => d.shots);
 
-    if (shotZonesChart) {
-        shotZonesChart.destroy();
-    }
+   if (shotZonesChart) {
+       shotZonesChart.destroy();
+   }
 
-    shotZonesChart = new Chart(ctxBarChart, {
-        type: 'bar',
-        data: {
-            labels: zones,
-            datasets: [{
-                label: 'Number of Shots Taken in Each Zone',
-                data: shots,
-                backgroundColor: '#ff5733',
-                borderColor: '#ff5733',
-                borderWidth: 1,
-            }]
-        },
-        options: {
-            plugins: {
-                title: {
-                    display: true,
-                    text: 'Total Number of Shots by Zone',
-                    font: {
-                        size: 18,
-                        weight: 'bold',
-                    },
-                },
-                legend: {
-                    position: 'right',
-                }
-            },
-            scales: {
-                x: {
-                    title: {
-                        display: true,
-                        text: 'Basketball Court Zones'
-                    }
-                },
-                y: {
-                    title: {
-                        display: true,
-                        text: 'Number of Shots'
-                    },
-                    min: 0,
-                    ticks: {
-                        stepSize: 5,
-                    }
-                }
-            },
-            responsive: true,
-            maintainAspectRatio: false
-        }
-    });
+   shotZonesChart = new Chart(ctxBarChart, {
+       type: 'bar',
+       data: {
+           labels: zones,
+           datasets: [{
+               label: 'Number of Shots Taken in Each Zone',
+               data: shots,
+               backgroundColor: '#ff5733',
+               borderColor: '#ff5733',
+               borderWidth: 1,
+           }]
+       },
+       options: {
+           plugins: {
+               title: {
+                   display: true,
+                   text: 'Total Number of Shots by Zone',
+                   font: {
+                       size: 18,
+                       weight: 'bold',
+                   },
+               },
+               legend: {
+                   position: 'right',
+               }
+           },
+           scales: {
+               x: {
+                   title: {
+                       display: true,
+                       text: 'Basketball Court Zones'
+                   }
+               },
+               y: {
+                   title: {
+                       display: true,
+                       text: 'Number of Shots'
+                   },
+                   min: 0,
+                   ticks: {
+                       stepSize: 5,
+                   }
+               }
+           },
+           responsive: true,
+           maintainAspectRatio: false
+       }
+   });
 };
 
 // Fetch shot data (simulating dynamic fetch here)
@@ -530,10 +530,10 @@ fetchData('all-time').then(createLineChart);
 //                     // Subtract `i` days from the current date to create different timestamps
 //                     const timestamp = new Date(currentDate);
 //                     timestamp.setDate(currentDate.getDate() - i); // Go back 'i' days
-    
+
 //                     // Format the timestamp into a readable date string (you can adjust format as needed)
 //                     const formattedDate = timestamp.toISOString().split('T')[0]; // YYYY-MM-DD format
-    
+
 //                     data.push({
 //                         time: formattedDate,  // Display formatted timestamp
 //                         accuracy: Math.random() * 100,  // Random accuracy value for illustration
@@ -594,11 +594,11 @@ fetchData('all-time').then(createLineChart);
 //     const createLineChart = (data) => {
 //         const labels = data.map(d => d.time);
 //         const accuracyData = data.map(d => d.accuracy);
-    
+
 //         if (accuracyChart) {
 //             accuracyChart.destroy();
 //         }
-    
+
 //         accuracyChart = new Chart(ctxLineChart, {
 //             type: 'line',
 //             data: {
@@ -650,32 +650,32 @@ fetchData('all-time').then(createLineChart);
 //             }
 //         });
 //     };
-    
+
 //     // Event listeners for the filter selects
 //     document.getElementById('dayFilter').addEventListener('change', (e) => {
 //         const filterType = e.target.value;
 //         fetchData(filterType).then(createLineChart);
 //     });
-    
+
 //     // document.getElementById('weekFilter').addEventListener('change', (e) => {
 //     //     const filterType = e.target.value;
 //     //     fetchData(filterType).then(createLineChart);
 //     // });
-    
+
 //     // document.getElementById('monthFilter').addEventListener('change', (e) => {
 //     //     const filterType = e.target.value;
 //     //     fetchData(filterType).then(createLineChart);
 //     // });
-    
+
 //     // document.getElementById('allTimeFilter').addEventListener('change', (e) => {
 //     //     const filterType = e.target.value;
 //     //     fetchData(filterType).then(createLineChart);
 //     // });
-    
+
 //     // --- Bar Chart: Basketball Shot Zones ---
 //     // const ctxBarChart = document.getElementById('shotZonesChart').getContext('2d');
 //     // let shotZonesChart;
-    
+
 
 //     // const createBarChart = (data) => {
 //     //     const zones = data.map(d => d.zone);
@@ -706,11 +706,11 @@ fetchData('all-time').then(createLineChart);
 //     const createBarChart = (data) => {
 //         const zones = data.map(d => d.zone);
 //         const shots = data.map(d => d.shots);
-    
+
 //         if (shotZonesChart) {
 //             shotZonesChart.destroy();
 //         }
-    
+
 //         shotZonesChart = new Chart(ctxBarChart, {
 //             type: 'bar',
 //             data: {
@@ -761,7 +761,7 @@ fetchData('all-time').then(createLineChart);
 //         });
 //     };
 
-    
+
 //     // Fetch and create the charts
 //     fetchData('all-time').then(createLineChart);
 //     fetchShotData().then(createBarChart);
@@ -841,7 +841,7 @@ fetchData('all-time').then(createLineChart);
 // // Call createRadarChart with radarData to initialize the radar chart
 // createRadarChart(radarData);
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const ctxLineChart = document.getElementById('accuracyChart').getContext('2d');
     const ctxBarChart = document.getElementById('shotZonesChart').getContext('2d');
     const ctxRadarChart = document.getElementById('shotAccuracyRadarChart').getContext('2d');  // New context for the radar chart
@@ -942,12 +942,12 @@ document.addEventListener('DOMContentLoaded', function() {
             console.log("Fetching zone stats...");
             const zoneStats = await DataModel.getZoneLogs(); // API call with token
             console.log("Raw zone stats:", zoneStats);
-    
+
             const processedData = zoneStats.map(zone => ({
                 zone: zone.zone, // zone name from DB
                 shots: zone.total_taken
             }));
-    
+
             console.log("Processed shot data:", processedData);
             return processedData;
         } catch (error) {
@@ -1044,14 +1044,14 @@ document.addEventListener('DOMContentLoaded', function() {
             console.log("Fetching zone stats...");
             const zoneStats = await DataModel.getZoneLogs(); // API call with token
             console.log("Raw zone stats:", zoneStats);
-    
+
             const processedData = zoneStats.map(zone => ({
                 zone: zone.zone, // zone name from DB
                 shots: zone.total_taken > 0
                     ? Math.round((zone.total_made / zone.total_taken) * 100)
                     : 0
             }));
-    
+
             console.log("Processed shot data:", processedData);
             return processedData;
         } catch (error) {
@@ -1059,28 +1059,28 @@ document.addEventListener('DOMContentLoaded', function() {
             return [];
         }
     };
-    
+
     // Creates Radar Chart
     const createRadarChart = (data) => {
         console.log("Creating radar chart with data:", data);
-    
+
         const zones = data.map(d => d.zone);
         const accuracy = data.map(d => d.shots);
-    
+
         console.log("Zones:", zones);
         console.log("Accuracy data:", accuracy);
-    
+
         const ctxRadarChart = document.getElementById('shotAccuracyRadarChart')?.getContext('2d');
-    
+
         if (!ctxRadarChart) {
             console.error("Canvas element with ID 'shotAccuracyRadarChart' not found.");
             return;
         }
-    
+
         if (radarChart) {
             radarChart.destroy();
         }
-    
+
         radarChart = new Chart(ctxRadarChart, {
             type: 'radar',
             data: {
