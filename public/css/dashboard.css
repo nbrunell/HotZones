@@ -269,3 +269,19 @@ svg path:hover {
 #missed-shot-button:hover {
   background-color: rgb(178, 0, 0);
 }
+
+.hotzone-logo {
+  display: block;
+  margin: 0 auto;           /* Remove top margin */
+  height: 70px;
+  width: 70px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 2px solid #d67214;
+  position: absolute;       /* <-- NEW */
+  top: 10px;                /* <-- Moves it closer to the top */
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 5;
+  margin-bottom: 100px;
+}

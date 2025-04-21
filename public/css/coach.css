@@ -93,3 +93,10 @@ body {
     cursor: pointer;
     box-shadow: 0 0 5px rgba(0,0,0,0.3);   
 }
+
+.future-plans {
+  color: #d67214;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 50px; 
+}
